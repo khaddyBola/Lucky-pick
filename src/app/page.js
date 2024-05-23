@@ -1,9 +1,26 @@
+"use client"
 import Image from "next/image";
+import Header from '../app/components/Header';
+import PotCard from '../app/components/PotCard';
+import Table from '../app/components/Table';
+import { AppProvider } from "./context/context";
+
+
+
+import style from '../app/styles/Home.module.css';
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      hello world
-    </main>
+    <>
+<AppProvider>
+    <div className={style.wrapper}>
+        <Header />
+        <PotCard />
+        <Table />
+    </div>
+</AppProvider>
+
+    </>
   );
 }

@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect, useContext } from 'react'
-import Web3 from 'web3'
-import createLotteryContract from '../utils/lottery'
+import { createContext, useState, useEffect, useContext } from 'react';
+import Web3 from 'web3';
+import createLotteryContract from '../utils/lottery';
 export const appContext = createContext()
 
 export const AppProvider = ({ children }) => {
@@ -53,22 +53,57 @@ export const AppProvider = ({ children }) => {
     }
   }
 
+
+
+
   const pickWinner = async () => {
     try {
-      let tx = await lotteryContract.methods.pickWinner().send({
+      
+
+      const tx = await lotteryContract.methods.pickWinner().send({
         from: address,
-        gas: 300000,
-        gasPrice: null,
+        gas: 1000000, // Adjust gas limit as needed
       });
-  
+
       console.log(tx);
-      setEtherscanUrl('https://sepolia-blockscout.lisk.com/tx/' + tx.transactionHash);
+      setEtherscanUrl(`https://sepolia-blockscout.lisk.com/api/${tx.transactionHash}`);
       updateLottery();
+
+      // Fetch the last winner after the transaction is complete
+      const winners = await lotteryContract.methods.getWinners().call();
+      setLastWinner(winners);
     } catch (err) {
       console.log(err, 'pick Winner');
     }
   };
-  
+
+
+//   const pickWinner = async () => {
+
+//     try {
+              
+
+//         const data = lotteryContract.methods.pickWinner().encodeABI();
+
+//         const tx = {
+//             from: address,
+//             to: lotteryContract,
+//             gas: 1000000, // Adjust gas limit as needed
+//             data: data
+//         };
+
+//         const txHash = await web3.eth.sendTransaction(tx);
+//         console.log(txHash);
+//         setEtherscanUrl('https://sepolia-blockscout.lisk.com/api/' + txHash.transactionHash);
+//         updateLottery();
+//     } catch (err) {
+//         console.error('Transaction failed:', err);
+//     }
+// };
+
+
+
+
 
   const connectWallet = async () => {
     /* check if MetaMask is installed */
@@ -125,3 +160,7 @@ export const AppProvider = ({ children }) => {
 export const useAppContext = () => {
   return useContext(appContext)
 }
+
+
+
+

@@ -49,6 +49,7 @@ contract Lottery {
 
         // Clear the players array. ['player1', 'player2'] 👉 []
         players = new address payable[](0);
+        
     }
 
     modifier onlyOwner() {

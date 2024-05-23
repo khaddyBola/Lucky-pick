@@ -1,6 +1,13 @@
 import style from '../styles/Header.module.css'
 import truncateEthAddress from 'truncate-eth-address'
 const UserCard = ({ address }) => {
+  const disconnectWalletHandler = async () => {
+    try {
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div>
       <div
