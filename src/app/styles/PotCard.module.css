@@ -45,8 +45,8 @@
   width: 50%;
   display: flex;
   justify-content: center;
-  place-self: center;
-  color: #f45358;
+  place-self: center; 
+  color: #FFE3B3;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -55,7 +55,7 @@
   border-radius: 1.5rem;
   font-weight: bolder;
   font-size: 1.5rem;
-  border: 1px solid #f45358;
+  border: 1px solid #FFE3B3;
 }
 
 .recentWinnerTitle {
@@ -75,7 +75,7 @@
 }
 
 .textAccent {
-  color: #f45358;
+  color: #FFE3B3;
 }
 
 .drawWinnerBtn {
