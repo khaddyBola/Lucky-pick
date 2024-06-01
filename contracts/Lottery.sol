@@ -41,16 +41,26 @@ contract Lottery {
     }
 
 
-    function pickWinner() public onlyOwner {
-        uint randomIndex = getRandomNumber() % players.length;
-        players[randomIndex].transfer(address(this).balance);
-        winners.push(players[randomIndex]);
-        lotteryId++;
+    // function pickWinner() public onlyOwner {
+    //     uint randomIndex = getRandomNumber() % players.length;
+    //     players[randomIndex].transfer(address(this).balance);
+    //     winners.push(players[randomIndex]);
+    //     lotteryId++;
 
-        // Clear the players array. ['player1', 'player2'] 👉 []
-        players = new address payable[](0);
+    //     // Clear the players array. ['player1', 'player2'] 👉 []
+    //     players = new address payable[](0);
         
-    }
+    // }
+
+    function pickWinner() public onlyOwner {
+    require(players.length > 0, "No players in the lottery");
+    uint randomIndex = getRandomNumber() % players.length;
+    address payable winner = players[randomIndex];
+    winner.transfer(address(this).balance);
+    winners.push(winner);
+    lotteryId++;
+    players = new address payable ;
+}
 
     modifier onlyOwner() {
       require(msg.sender == owner);

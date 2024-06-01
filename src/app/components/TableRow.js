@@ -10,4 +10,4 @@ const TableRow = ({ player }) => {
     </div>
   )
 }
-export default TableRow
+export default TableRow;

@@ -54,29 +54,33 @@ export const AppProvider = ({ children }) => {
   }
 
 
+//   const pickWinner = async () => {
+//     const tx = await lotteryContract.methods.getWinners().call();
+//     await tx.wait();
+//     setLastWinner(winners);
+//     console.log(tx, setLastWinner )
+// }
 
 
-  const pickWinner = async () => {
-    try {
-      
 
-      const tx = await lotteryContract.methods.pickWinner().send({
-        from: address,
-        gas: 1000000, // Adjust gas limit as needed
-      });
+const pickWinner = async () => {
+  try {
+    const tx = await lotteryContract.methods.pickWinner().send({
+      from: address,
+      gas: 1000000, // Adjust gas limit as needed
+    });
 
-      console.log(tx);
-      setEtherscanUrl(`https://sepolia-blockscout.lisk.com/api/${tx.transactionHash}`);
-      updateLottery();
+    console.log(tx);
+    setEtherscanUrl(`https://sepolia-blockscout.lisk.com/tx/${tx.transactionHash}`);
+    updateLottery();
 
-      // Fetch the last winner after the transaction is complete
-      const winners = await lotteryContract.methods.getWinners().call();
-      setLastWinner(winners);
-    } catch (err) {
-      console.log(err, 'pick Winner');
-    }
-  };
-
+    // Fetch the last winner after the transaction is complete
+    const winners = await lotteryContract.methods.getWinners().call();
+    setLastWinner(winners);
+  } catch (err) {
+    console.log(err, 'pick Winner');
+  }
+};
 
 //   const pickWinner = async () => {
 
